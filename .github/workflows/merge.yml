@@ -1,0 +1,22 @@
+name: Merge Workflow
+
+on:
+  push:
+    branches:
+      - release
+
+jobs:
+  merge:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Check number of changed files
+        run: |
+          release_files=$(git diff --name-only origin/release | wc -l)
+          main_files=$(git diff --name-only origin/main | wc -l)
+          if [ $release_files -eq $main_files ]; then
+            git checkout main
+            git merge --no-ff origin/release
