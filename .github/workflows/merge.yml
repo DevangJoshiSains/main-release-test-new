@@ -1,20 +1,23 @@
-name: Update Main Branch
-
-on:
-  push:
-    branches:
-      - release
-
+name: PRs to release
+on: 
+  pull_request:
+    branches: [release]
+    types: [closed]
 jobs:
-  update-main:
+  merge-release-back-to-main:
+    if: github.event.pull_request.merged == true
+    timeout-minutes: 2
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Update Main Branch
-        run: |
+    - uses: actions/checkout@v2
+    - name: Set Git config
+      run: |
+          git config --local user.email "actions@github.com"
+          git config --local user.name "Github Actions"
+    - name: Merge release back to main
+      run: |
+          git fetch --unshallow
           git checkout main
-          git merge --no-ff origin/release
-          git push origin main
+          git pull
+          git merge --no-ff release -m "Auto-merge release back to main"
+          git push
