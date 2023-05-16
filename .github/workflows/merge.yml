@@ -14,6 +14,7 @@ jobs:
       run: |
           git config --local user.email "devang.joshi@sainsburys.co.uk"
           git config --local user.name "Github Actions"
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY
     - name: Merge release back to main
       run: |
           git fetch --unshallow
