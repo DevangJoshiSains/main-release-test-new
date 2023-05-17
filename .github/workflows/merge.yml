@@ -12,8 +12,8 @@ jobs:
     - uses: actions/checkout@v2
     - name: Set Git config
       run: |
-          git config --local user.email "devang.joshi@sainsburys.co.uk"
-          git config --local user.name "Github Actions"
+          git config user.name SVCGDPKIWICICD01
+          git config user.email SVCGDPKIWICICD01@sainsburys.co.uk
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY
     - name: Merge release back to main
       run: |
