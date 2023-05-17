@@ -14,7 +14,7 @@ jobs:
       run: |
           git config user.name SVCGDPKIWICICD01
           git config user.email SVCGDPKIWICICD01@sainsburys.co.uk
-          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY
+          git clone https://x-access-token:${{ secrets.SVCGDPKIWICICD01_TOKEN }}@github.com/DevangJoshiSains/main-release-test-new ../main-release-test-new 
     - name: Merge release back to main
       run: |
           git fetch --unshallow
